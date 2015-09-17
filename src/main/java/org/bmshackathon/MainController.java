@@ -12,6 +12,9 @@ class MainController {
     @RequestMapping("/")
     public String index(Map<String, Object> model) {
         model.put("time", new Date());
+
+        model.put("videos", new VideoRepository().findAll());
+
         return "index";
     }
 }

@@ -65,6 +65,34 @@
 </nav>
 
 <!-- Page Content -->
+<footer class="page-footer indigo darken-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col-md-6">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2015 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+<!-- /.container -->
+
+<!-- Footer -->
 <div class="container">
 
     <!-- Page Header -->
@@ -79,105 +107,24 @@
 
     <!-- Content Row -->
     <div class="row">
+        {{#videos}}
         <div class="col-md-4">
             <div class="card hoverable">
                 <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k2.jpg">
-                    <span class="card-title">Card Title</span>
+                    <img src="{{imageUrl}}">
+                    <span class="card-title">{{title}}</span>
                 </div>
                 <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
+                    <p>{{description}}</p>
                 </div>
                 <div class="card-action">
                     <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
                 </div>
             </div>
         </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k5.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
-                </div>
-                <div class="card-action">
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k6.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
-                </div>
-                <div class="card-action">
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
+        {{/videos}}
     </div>
     <!-- /.row -->
-
-    <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k1.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
-                </div>
-                <div class="card-action">
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k3.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
-                </div>
-                <div class="card-action">
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-        <div class="col-md-4">
-            <div class="card hoverable">
-                <div class="card-image">
-                    <img src="http://brandflow.pl/wp-content/uploads/2015/08/k4.jpg">
-                    <span class="card-title">Card Title</span>
-                </div>
-                <div class="card-content">
-                    <p>Lorem ipsum dolor sit amet enim. Etiam ullamcorper. Suspendisse a pellentesque dui, non felis.</p>
-                </div>
-                <div class="card-action">
-                    <button type="button" class="btn btn-primary waves-effect waves-light">Read more</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-4 -->
-    </div>
-    <!-- /.row -->
-
-
     <hr>
 
     <!-- Pagination -->
@@ -213,34 +160,6 @@
     <hr>
 
 </div>
-<!-- /.container -->
-
-<!-- Footer -->
-<footer class="page-footer indigo darken-1">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
-            <div class="col-md-6">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="container">
-            © 2015 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-        </div>
-    </div>
-</footer>
 
 
 
