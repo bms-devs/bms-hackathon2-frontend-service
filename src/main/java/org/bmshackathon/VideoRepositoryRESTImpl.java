@@ -5,6 +5,7 @@ import org.bmshackathon.video.VideoImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.management.ServiceNotFoundException;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Component
 public class VideoRepositoryRESTImpl implements VideoRepository {
 
     @Autowired
@@ -21,11 +23,9 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
 
     @Override
     public List<Video> findAll() {
-        return videoMetadataFeignRepository.findAll()
-                .stream()
-                .map(vm ->
-                        new Video(vm.getUuid(), vm, getImageForUuid(vm.getUuid()))
-                ).collect(Collectors.toList());
+        return videoMetadataFeignRepository.findAll().stream()
+                .map(vm -> new Video(vm.getUuid(), vm, getImageForUuid(vm.getUuid())))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -36,6 +36,7 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
     private VideoImage getImageForUuid(Long uuid) {
         RestTemplate restTemplate = new RestTemplate();
         VideoImage image;
+
         // let's assume for a moment that image store is not eligible for use for a feign client
         ServiceInstance imageUrlServiceInstance = null;
         try {

@@ -11,10 +11,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
 class MainController {
-    private VideoMetadataFeignRepository repository;
+    private VideoRepository repository;
 
     @Autowired
-    MainController(VideoMetadataFeignRepository repository) {
+    MainController(VideoRepository repository) {
         this.repository = repository;
     }
 
