@@ -26,6 +26,7 @@ class MainController {
 
     @RequestMapping(value = "/video/{uuid}/details", method = GET)
     public String videoDetail(@PathVariable Long uuid,  Map<String, Object> model) {
+        model.put("video", repository.findByUuid(uuid));
         return "details";
     }
 }

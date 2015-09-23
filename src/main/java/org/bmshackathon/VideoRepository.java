@@ -9,5 +9,5 @@ import java.util.List;
 @RepositoryRestResource
 public interface VideoRepository {
     List<Video> findAll();
-    List<Video> findByUuid(Long uuid);
+    Video findByUuid(Long uuid);
 }

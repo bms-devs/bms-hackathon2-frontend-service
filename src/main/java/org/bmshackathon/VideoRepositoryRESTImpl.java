@@ -2,6 +2,7 @@ package org.bmshackathon;
 
 import org.bmshackathon.video.Video;
 import org.bmshackathon.video.VideoImage;
+import org.bmshackathon.video.VideoMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -34,8 +35,10 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
     }
 
     @Override
-    public List<Video> findByUuid(Long uuid) {
-        throw new NotImplementedException();
+    public Video findByUuid(Long uuid) {
+        VideoMetadata metadata = videoMetadataFeignRepository.findOne(uuid);
+        VideoImage videoImage = getImageForUuid(uuid);
+        return new Video(uuid, metadata, videoImage);
     }
 
     private VideoImage getImageForUuid(Long uuid) {
