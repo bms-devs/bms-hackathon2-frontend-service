@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import javax.management.ServiceNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -36,23 +36,20 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
 
     private VideoImage getImageForUuid(Long uuid) {
         RestTemplate restTemplate = new RestTemplate();
-        VideoImage image;
 
         // let's assume for a moment that image store is not eligible for use for a feign client
-        ServiceInstance imageUrlServiceInstance = null;
-        try {
-            imageUrlServiceInstance = anyServiceInstance("imageurl-store");
-            image = restTemplate.getForObject(imageUrlServiceInstance.getUri() + "/image/" + uuid, VideoImage.class);
-        } catch (ServiceNotFoundException e) {
-            image = VideoImage.createDefaultFor(uuid);
-        }
-        return image;
+        return anyServiceInstance("imageurl-store")
+                .map(service -> restTemplate.getForObject(service.getUri() + "/image/" + uuid, VideoImage.class))
+                .orElseGet(() -> VideoImage.createDefaultFor(uuid));
     }
 
-    private ServiceInstance anyServiceInstance(String serviceName) throws ServiceNotFoundException {
+    private Optional<ServiceInstance> anyServiceInstance(String serviceName) {
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
-        if(instances.size() == 0)
-            throw new ServiceNotFoundException();
-        return instances.get(new Random().nextInt(instances.size()));
+        if(instances.size() == 0) {
+            return Optional.empty();
+        }else {
+            //yes, you have found a load balancer.
+            return Optional.of(instances.get(new Random().nextInt(instances.size())));
+        }
     }
 }
