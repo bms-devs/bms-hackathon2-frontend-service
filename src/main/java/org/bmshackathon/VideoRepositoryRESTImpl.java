@@ -17,10 +17,14 @@ import java.util.stream.Collectors;
 @Component
 public class VideoRepositoryRESTImpl implements VideoRepository {
 
-    @Autowired
     private DiscoveryClient discoveryClient;
-    @Autowired
     private VideoMetadataFeignRepository videoMetadataFeignRepository;
+
+    @Autowired
+    public VideoRepositoryRESTImpl(DiscoveryClient discoveryClient, VideoMetadataFeignRepository videoMetadataFeignRepository) {
+        this.discoveryClient = discoveryClient;
+        this.videoMetadataFeignRepository = videoMetadataFeignRepository;
+    }
 
     @Override
     public List<Video> findAll() {
