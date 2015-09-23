@@ -1,4 +1,4 @@
-package org.bmshackathon;
+package org.bmshackathon.client;
 
 import org.bmshackathon.video.VideoMetadata;
 import org.springframework.cloud.netflix.feign.FeignClient;
@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @FeignClient("metadata-store")
-@Component
-public interface VideoMetadataFeignRepository {
+public interface VideoMetadataFeignClient {
 
     @RequestMapping(value = "/videoMetadatas", method = RequestMethod.GET)
     List<VideoMetadata> findAll();
