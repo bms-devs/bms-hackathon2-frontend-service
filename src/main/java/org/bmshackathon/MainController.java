@@ -24,9 +24,9 @@ class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/video/{uuid}/details", method = GET)
-    public String videoDetail(@PathVariable Long uuid,  Map<String, Object> model) {
-        model.put("video", repository.findByUuid(uuid));
+    @RequestMapping(value = "/video/{id}/details", method = GET)
+    public String videoDetail(@PathVariable Long id, Map<String, Object> model) {
+        model.put("video", repository.findOne(id));
         return "details";
     }
 }

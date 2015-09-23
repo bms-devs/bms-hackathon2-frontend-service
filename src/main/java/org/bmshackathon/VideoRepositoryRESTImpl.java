@@ -8,7 +8,6 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,24 +29,24 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
     @Override
     public List<Video> findAll() {
         return videoMetadataFeignRepository.findAll().stream()
-                .map(vm -> new Video(vm.getUuid(), vm, getImageForUuid(vm.getUuid())))
+                .map(vm -> new Video(vm.getUuid(), vm, getImageForVideo(vm.getUuid())))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Video findByUuid(Long uuid) {
-        VideoMetadata metadata = videoMetadataFeignRepository.findOne(uuid);
-        VideoImage videoImage = getImageForUuid(uuid);
-        return new Video(uuid, metadata, videoImage);
+    public Video findOne(Long id) {
+        VideoMetadata metadata = videoMetadataFeignRepository.findOne(id);
+        VideoImage videoImage = getImageForVideo(id);
+        return new Video(id, metadata, videoImage);
     }
 
-    private VideoImage getImageForUuid(Long uuid) {
+    private VideoImage getImageForVideo(Long id) {
         RestTemplate restTemplate = new RestTemplate();
 
         // let's assume for a moment that image store is not eligible for use for a feign client
         return anyServiceInstance("imageurl-store")
-                .map(service -> restTemplate.getForObject(service.getUri() + "/image/" + uuid, VideoImage.class))
-                .orElseGet(() -> VideoImage.createDefaultFor(uuid));
+                .map(service -> restTemplate.getForObject(service.getUri() + "/image/" + id, VideoImage.class))
+                .orElseGet(() -> VideoImage.createDefaultFor(id));
     }
 
     private Optional<ServiceInstance> anyServiceInstance(String serviceName) {

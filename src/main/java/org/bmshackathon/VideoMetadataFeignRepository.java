@@ -16,6 +16,6 @@ public interface VideoMetadataFeignRepository {
     @RequestMapping(value = "/videoMetadatas", method = RequestMethod.GET)
     List<VideoMetadata> findAll();
 
-    @RequestMapping(value = "/videoMetadatas/{uuid}", method = RequestMethod.GET)
-    VideoMetadata findOne(@PathVariable("uuid") Long uuid);
+    @RequestMapping(value = "/videoMetadatas/{id}", method = RequestMethod.GET)
+    VideoMetadata findOne(@PathVariable("id") Long id);
 }
