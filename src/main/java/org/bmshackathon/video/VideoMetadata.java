@@ -12,6 +12,9 @@ public class VideoMetadata {
     private String title;
     private String description;
 
+    VideoMetadata() {
+    }
+
     public VideoMetadata(Long id, Long uuid, String title, String description) {
         this.id = id;
         this.uuid = uuid;

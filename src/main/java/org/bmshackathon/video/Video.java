@@ -4,18 +4,18 @@ package org.bmshackathon.video;
  * Created by lk on 21.09.15.
  */
 public class Video {
-    long uuid;
+    long id;
     VideoMetadata metadata;
     VideoImage image;
 
-    public Video(long uuid, VideoMetadata metadata, VideoImage image) {
-        this.uuid = uuid;
+    public Video(long id, VideoMetadata metadata, VideoImage image) {
+        this.id = id;
         this.metadata = metadata;
         this.image = image;
     }
 
-    public Long getUuid() {
-        return uuid;
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -33,7 +33,7 @@ public class Video {
     @Override
     public String toString() {
         return "VideoTeaser{" +
-                "id='" + getUuid()+ '\'' +
+                "id='" + getId()+ '\'' +
                 ", title='" + getTitle() + '\'' +
                 ", imageUrl='" + getImageUrl() + '\'' +
                 ", description='" + getDescription() + '\'' +
