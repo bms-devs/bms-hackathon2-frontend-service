@@ -7,6 +7,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.management.ServiceNotFoundException;
 import java.util.List;
@@ -30,7 +31,7 @@ public class VideoRepositoryRESTImpl implements VideoRepository {
 
     @Override
     public List<Video> findByUuid(Long uuid) {
-        return null;
+        throw new NotImplementedException();
     }
 
     private VideoImage getImageForUuid(Long uuid) {
