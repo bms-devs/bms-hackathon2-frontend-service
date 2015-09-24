@@ -26,7 +26,7 @@ public class RestVideoRepository implements VideoRepository {
     @Override
     public List<Video> findAll() {
         return videoMetadataFeignClient.findAll().stream()
-                .map(vm -> new Video(vm.getUuid(), vm, videoImageClient.findOne(vm.getUuid())))
+                .map(vm -> new Video(vm.getId(), vm, videoImageClient.findOne(vm.getId())))
                 .collect(Collectors.toList());
     }
 

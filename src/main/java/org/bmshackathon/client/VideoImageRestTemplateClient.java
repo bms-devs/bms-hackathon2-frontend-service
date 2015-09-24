@@ -25,7 +25,7 @@ public class VideoImageRestTemplateClient implements VideoImageClient{
     public VideoImage findOne(Long id) {
         //let's assume for a moment that image store is not eligible for use for a feign client
         return anyServiceInstance("imageurl-store")
-                .map(service -> new RestTemplate().getForObject(service.getUri() + "/image/" + id, VideoImage.class))
+                .map(service -> new RestTemplate().getForObject(service.getUri() + "/videoImage/" + id, VideoImage.class))
                 .orElseGet(() -> VideoImage.createDefaultFor(id));
     }
 
@@ -34,7 +34,7 @@ public class VideoImageRestTemplateClient implements VideoImageClient{
         if(instances.size() == 0) {
             return Optional.empty();
         }else {
-            //yes, you have found a load balancer.
+            //yes, you have found a [professional - lk] load balancer.
             return Optional.of(instances.get(new Random().nextInt(instances.size())));
         }
     }
