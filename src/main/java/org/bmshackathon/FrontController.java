@@ -10,11 +10,11 @@ import java.util.Map;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Controller
-class MainController {
+class FrontController {
     private VideoRepository repository;
 
     @Autowired
-    MainController(VideoRepository repository) {
+    FrontController(VideoRepository repository) {
         this.repository = repository;
     }
 
