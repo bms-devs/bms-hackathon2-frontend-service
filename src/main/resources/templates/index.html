@@ -51,8 +51,8 @@
                     <img src="{{imageUrl}}">
                     <span class="card-title">{{title}}</span>
                 </div>
-                <div class="card-content">
-                    <p>{{description}}</p>
+                <div class="card-content description">
+                    {{description}}
                 </div>
                 <div class="card-action">
                     <button type="button"
@@ -115,6 +115,11 @@
 <!-- Material Design Bootstrap -->
 <script type="text/javascript" src="js/mdb.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.dotdotdot/1.7.4/jquery.dotdotdot.min.js"></script>
+
+<script>
+    $(".description").dotdotdot();
+</script>
 
 </body>
 
