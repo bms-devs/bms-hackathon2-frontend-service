@@ -2,12 +2,13 @@ package org.bmshackathon;
 
 
 import org.bmshackathon.video.Video;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.bmshackathon.video.VideoReview;
 
 import java.util.List;
 
-@RepositoryRestResource
+//@RepositoryRestResource
 public interface VideoRepository {
     List<Video> findAll();
     Video findOne(Long id);
+    List<VideoReview> findAllReviews(Long id);
 }

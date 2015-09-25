@@ -44,18 +44,6 @@
                     </h4>
                     <p>{{video.description}}</p>
                 </div>
-                <div class="ratings">
-                    <p class="pull-right">3 reviews</p>
-                    <p>
-                    <ul class="list-inline">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </ul> 4.0 stars
-                    </p>
-                </div>
             </div>
 
             <div class="well">
@@ -66,52 +54,18 @@
 
                 <hr>
 
+                {{#reviews}}
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="list-inline">
+                            {{#ratingAsList}}
                             <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </ul> Anonymous
-                        <span class="pull-right">10 days ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                            {{/ratingAsList}}
+                        </ul> {{clientFullName}}
+                        <p>{{text}}</p>
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="list-inline">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </ul> Anonymous
-                        <span class="pull-right">12 days ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="list-inline">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </ul>
-                        Anonymous
-                        <span class="pull-right">15 days ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-                    </div>
-                </div>
+                {{/reviews}}
 
             </div>
 

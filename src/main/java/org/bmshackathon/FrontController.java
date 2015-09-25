@@ -27,6 +27,7 @@ class FrontController {
     @RequestMapping(value = "/video/{id}/details", method = GET)
     public String videoDetail(@PathVariable Long id, Map<String, Object> model) {
         model.put("video", repository.findOne(id));
+        model.put("reviews", repository.findAllReviews(id));
         return "details";
     }
 }
