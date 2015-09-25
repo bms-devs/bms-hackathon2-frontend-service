@@ -1,18 +1,30 @@
 package org.bmshackathon.video;
 
-/**
- * Created by lk on 21.09.15.
- */
-public class Video {
-    long id;
-    VideoMetadata metadata;
-    VideoImage image;
+import java.math.BigDecimal;
+import java.util.Optional;
 
-    public Video(long id, VideoMetadata metadata, VideoImage image) {
+
+public class Video {
+    final long id;
+    final VideoMetadata metadata;
+    final VideoImage image;
+    final Optional<BigDecimal> price;
+
+    private Video(long id, VideoMetadata metadata, VideoImage image, Optional<BigDecimal> price) {
         this.id = id;
         this.metadata = metadata;
         this.image = image;
+        this.price = price;
     }
+
+    public static Video withPrice(long id, VideoMetadata metadata, VideoImage image, BigDecimal price) {
+        return new Video(id, metadata, image, Optional.of(price));
+    }
+
+    public static Video withoutPrice(long id, VideoMetadata metadata, VideoImage image) {
+        return new Video(id, metadata, image, Optional.empty());
+    }
+
 
     public Long getId() {
         return id;
@@ -28,6 +40,12 @@ public class Video {
 
     public String getDescription() {
         return metadata.getDescription();
+    }
+
+    public String getPriceAsText() {
+        return price
+                .map(price -> "$"+price)
+                .orElseGet(() -> "");
     }
 
     @Override

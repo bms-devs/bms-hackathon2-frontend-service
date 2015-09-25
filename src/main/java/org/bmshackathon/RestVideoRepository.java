@@ -1,5 +1,6 @@
 package org.bmshackathon;
 
+import org.bmshackathon.client.VideoPriceCalculatorClient;
 import org.bmshackathon.client.VideoReviewClient;
 import org.bmshackathon.client.VideoImageClient;
 import org.bmshackathon.client.VideoMetadataFeignClient;
@@ -10,6 +11,7 @@ import org.bmshackathon.video.VideoReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +21,20 @@ public class RestVideoRepository implements VideoRepository {
     private final VideoMetadataFeignClient videoMetadataFeignClient;
     private final VideoImageClient videoImageClient;
     private final VideoReviewClient reviewClient;
+    private final VideoPriceCalculatorClient videoPriceCalculatorClient;
 
     @Autowired
-    public RestVideoRepository(VideoMetadataFeignClient videoMetadataFeignClient, VideoImageClient videoImageClient, VideoReviewClient reviewClient) {
+    public RestVideoRepository(VideoMetadataFeignClient videoMetadataFeignClient, VideoImageClient videoImageClient, VideoReviewClient reviewClient, VideoPriceCalculatorClient videoPriceCalculatorClient) {
         this.videoMetadataFeignClient = videoMetadataFeignClient;
         this.videoImageClient = videoImageClient;
         this.reviewClient = reviewClient;
+        this.videoPriceCalculatorClient = videoPriceCalculatorClient;
     }
 
     @Override
     public List<Video> findAll() {
         return videoMetadataFeignClient.findAll().stream()
-                .map(vm -> new Video(vm.getId(), vm, videoImageClient.findOne(vm.getId())))
+                .map(vm -> Video.withoutPrice(vm.getId(), vm, videoImageClient.findOne(vm.getId())))
                 .collect(Collectors.toList());
     }
 
@@ -38,7 +42,8 @@ public class RestVideoRepository implements VideoRepository {
     public Video findOne(Long id) {
         VideoMetadata metadata = videoMetadataFeignClient.findOne(id);
         VideoImage videoImage = videoImageClient.findOne(id);
-        return new Video(id, metadata, videoImage);
+        BigDecimal price = videoPriceCalculatorClient.calculateFor(id);
+        return Video.withPrice(id, metadata, videoImage, price);
     }
 
     @Override
