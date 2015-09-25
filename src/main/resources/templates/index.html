@@ -47,8 +47,8 @@
         {{#videos}}
         <div class="col-md-4">
             <div class="card hoverable">
-                <div class="card-image">
-                    <img src="{{imageUrl}}">
+                <div class="card-image" onclick="location.href='video/{{id}}/details';">
+                    <img src="{{imageUrl}}" href="video/{{id}}/details">
                     <span class="card-title">{{title}}</span>
                 </div>
                 <div class="card-content description">
