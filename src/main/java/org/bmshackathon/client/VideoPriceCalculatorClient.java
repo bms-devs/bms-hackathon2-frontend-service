@@ -27,17 +27,20 @@ public class VideoPriceCalculatorClient {
         this.discoveryClient = discoveryClient;
     }
 
-    //@HystrixCommand(fallbackMethod = "defaultPrice")
+    @HystrixCommand(fallbackMethod = "defaultPrice")
     public BigDecimal calculateFor(Long id) {
-//        return new BigDecimal("6.66");
-        VideoPrice videoPriceResponse = anyServiceInstance("pricing-service")
+        return anyServiceInstance("pricing-service")
                 .map(service -> new RestTemplate().getForObject(service.getUri() + "/videoPrices/" + id, VideoPrice.class))
-                .orElseGet(() -> new VideoPrice(Long.getLong("12"), new BigDecimal("123.13")));
-
-        return videoPriceResponse.getPrice();
+                .map(videoPrice -> videoPrice.getPrice() )
+                .orElseGet(() -> defaultPrice());
     }
 
     public BigDecimal defaultPrice(Long id) {
+        // It's free!
+        return BigDecimal.valueOf(0.0);
+    }
+
+    public BigDecimal defaultPrice() {
         // It's free!
         return BigDecimal.valueOf(0.0);
     }
