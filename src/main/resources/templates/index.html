@@ -35,6 +35,40 @@
     <!-- Page Header -->
     <div class="row">
         <div class="col-lg-12">
+            <h1 class="page-header">Our recommendations
+                <small>just for you</small>
+            </h1>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <!-- Content Row -->
+    <div class="row">
+        {{#recommendations}}
+        <div class="col-md-4">
+            <div class="card hoverable">
+                <div class="card-image" onclick="location.href='video/{{id}}/details';">
+                    <img src="{{imageUrl}}" href="video/{{id}}/details">
+                    <span class="card-title">{{title}}</span>
+                </div>
+                <div class="card-content description">
+                    {{description}}
+                </div>
+                <div class="card-action">
+                    <button type="button"
+                            onclick="location.href='video/{{id}}/details';"
+                            class="btn btn-primary waves-effect waves-light">Read more</button>
+                </div>
+            </div>
+        </div>
+        {{/recommendations}}
+    </div>
+    <!-- /.row -->
+    <hr>
+
+    <!-- Page Header -->
+    <div class="row">
+        <div class="col-lg-12">
             <h1 class="page-header">Our gallery
                 <small>just for you</small>
             </h1>
