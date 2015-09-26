@@ -1,16 +1,17 @@
 package org.bmshackathon.client;
 
 import org.bmshackathon.video.VideoReview;
-import org.springframework.stereotype.Component;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.Collections;
 import java.util.List;
 
-@Component
-public class VideoReviewClient {
+@FeignClient("review-service")
+public interface VideoReviewClient {
 
-    //TODO
-    public List<VideoReview> findAll(Long id) {
-        return Collections.emptyList();
-    }
+    @RequestMapping(value = "/findByVideoId/{id}", method = RequestMethod.GET)
+    public List<VideoReview> findByVideoId(@PathVariable("id") Long id);
+
 }

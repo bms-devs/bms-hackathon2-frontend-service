@@ -19,6 +19,9 @@ public class VideoMetadata {
         this.title = title;
         this.description = description;
     }
+    public static VideoMetadata createDefault(Long id) {
+        return new VideoMetadata(id, "default", "no description");
+    }
     public Long getId() {
         return id;
     }
