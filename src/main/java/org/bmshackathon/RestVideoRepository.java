@@ -78,8 +78,7 @@ public class RestVideoRepository implements VideoRepository {
     @Override
     @HystrixCommand(fallbackMethod = "getRecommendationsDefault")
     public List<Video> getRecommendation() {
-//      List<Long> recommendationIds = recommendationFeignClient.getRecommendation();
-        List<Long> recommendationIds = Arrays.asList(new Long(1),new Long(1),new Long(1));
+        List<Long> recommendationIds = recommendationFeignClient.getRecommendation();
         return recommendationIds.stream()
                 .map(id -> Video.withoutPrice(id, videoMetadataFeignClient.findOne(id), videoImageClient.findOne(id)))
                 .collect(Collectors.toList());
