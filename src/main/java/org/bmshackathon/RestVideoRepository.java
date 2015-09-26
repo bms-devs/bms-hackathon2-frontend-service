@@ -62,6 +62,6 @@ public class RestVideoRepository implements VideoRepository {
     }
     @Override
     public List<VideoReview> findAllReviews(Long id) {
-        return reviewClient.findAll(id);
+        return reviewClient.findByVideoId(id);
     }
 }
