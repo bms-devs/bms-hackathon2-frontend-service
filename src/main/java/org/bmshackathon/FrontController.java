@@ -21,6 +21,7 @@ class FrontController {
     @RequestMapping(value="/", method = GET)
     public String index(Map<String, Object> model) {
         model.put("videos", repository.findAll());
+        model.put("recommendations", repository.getRecommendation());
         return "index";
     }
 

@@ -11,4 +11,5 @@ public interface VideoRepository {
     List<Video> findAll();
     Video findOne(Long id);
     List<VideoReview> findAllReviews(Long id);
+    List<Video> getRecommendation();
 }
