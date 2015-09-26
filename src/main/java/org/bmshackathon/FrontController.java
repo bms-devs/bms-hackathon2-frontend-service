@@ -1,5 +1,6 @@
 package org.bmshackathon;
 
+import org.apache.commons.io.IOUtils;
 import org.bmshackathon.client.VideoImageRestTemplateClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -38,10 +40,15 @@ class FrontController {
     }
 
     @RequestMapping(value = "/getImageAscii/{id}", method = GET)
-    public @ResponseBody String getImageAscii(@PathVariable Long id, HttpServletResponse response) {
+    @ResponseBody
+    public void getImageAscii(@PathVariable Long id, HttpServletResponse response) throws IOException {
         byte[] s = videoImageRestTemplateClient.findAscii(id);
 
+
+
         //System.out.println("getImageAscii " + new String(s));
-        return new String(s);
+//        return new String(s);
+
+        IOUtils.copy(new ByteArrayInputStream(s), response.getOutputStream());
     }
 }
