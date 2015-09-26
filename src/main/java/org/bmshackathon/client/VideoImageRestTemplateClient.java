@@ -1,5 +1,6 @@
 package org.bmshackathon.client;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.bmshackathon.video.VideoImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -22,12 +23,15 @@ public class VideoImageRestTemplateClient implements VideoImageClient{
     }
 
     @Override
+
     public VideoImage findOne(Long id) {
         //let's assume for a moment that image store is not eligible for use for a feign client
         return anyServiceInstance("imageurl-store")
                 .map(service -> new RestTemplate().getForObject(service.getUri() + "/videoImage/" + id, VideoImage.class))
                 .orElseGet(() -> VideoImage.createDefaultFor(id));
     }
+
+
 
     private Optional<ServiceInstance> anyServiceInstance(String serviceName) {
         List<ServiceInstance> instances = discoveryClient.getInstances(serviceName);
