@@ -45,9 +45,10 @@
                     <p>{{video.description}}</p>
 
                     <div class="text-right">
-                        <a class="btn btn-success waves-effect waves-light">Buy ASCII</a>
+                        <button type="button"
+                                onclick="$.get('/getImageAscii/{{id}}');"
+                                class="btn btn-success waves-effect waves-light">Buy ASCII</button>
                     </div>
-
                 </div>
             </div>
 
