@@ -1,10 +1,10 @@
 package org.bmshackathon;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.bmshackathon.client.VideoPriceCalculatorClient;
-import org.bmshackathon.client.VideoReviewClient;
 import org.bmshackathon.client.VideoImageClient;
 import org.bmshackathon.client.VideoMetadataFeignClient;
+import org.bmshackathon.client.VideoPriceCalculatorClient;
+import org.bmshackathon.client.VideoReviewClient;
 import org.bmshackathon.video.Video;
 import org.bmshackathon.video.VideoImage;
 import org.bmshackathon.video.VideoMetadata;
@@ -42,10 +42,12 @@ public class RestVideoRepository implements VideoRepository {
                 .map(vm -> Video.withoutPrice(vm.getId(), vm, videoImageClient.findOne(vm.getId())))
                 .collect(Collectors.toList());
     }
+
     public List<Video> findDefaultAll() {
         return new ArrayList<Video>();
 
     }
+
     @Override
     @HystrixCommand(fallbackMethod = "findDefaultOne")
     public Video findOne(Long id) {
@@ -54,14 +56,22 @@ public class RestVideoRepository implements VideoRepository {
         BigDecimal price = videoPriceCalculatorClient.calculateFor(id);
         return Video.withPrice(id, metadata, videoImage, price);
     }
+
     public Video findDefaultOne(Long id) {
         VideoMetadata metadata = VideoMetadata.createDefault(id);
         VideoImage videoImage = videoImageClient.findOne(id);
         BigDecimal price = videoPriceCalculatorClient.calculateFor(id);
         return Video.withPrice(id, metadata, videoImage, price);
     }
+
     @Override
+    @HystrixCommand(fallbackMethod = "findAllReviewsDefault")
     public List<VideoReview> findAllReviews(Long id) {
         return reviewClient.findByVideoId(id);
+    }
+
+    public List<VideoReview> findAllReviewsDefault(Long id) {
+        return new ArrayList<VideoReview>();
+
     }
 }
